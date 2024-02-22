@@ -1,43 +1,23 @@
 import { screen, render } from "@testing-library/react"
-import { setupServer } from "msw/node"
-import { rest } from "msw"
+import { createServer } from "../test/server"
 import { MemoryRouter } from "react-router"
 import HomeRoute from "./HomeRoute"
 
-const handlers = [
-  rest.get("/api/repositories", (req, res, ctx) => {
-    const language = req.url.searchParams.get("q").split("language:")[1]
-
-    return res(
-      ctx.json({
+createServer([
+  {
+    path: "/api/repositories",
+    method: "get",
+    res: (req, res, ctx) => {
+      const language = req.url.searchParams.get("q").split("language:")[1]
+      return {
         items: [
-          {
-            id: 1,
-            full_name: `${language}_one`,
-          },
-          {
-            id: 2,
-            full_name: `${language}_two`,
-          },
+          { id: 1, full_name: `${language}_one` },
+          { id: 2, full_name: `${language}_two` },
         ],
-      })
-    )
-  }),
-]
-
-const server = setupServer(...handlers)
-
-beforeAll(() => {
-  server.listen()
-})
-
-afterEach(() => {
-  server.resetHandlers()
-})
-
-afterAll(() => {
-  server.close()
-})
+      }
+    },
+  },
+])
 
 function renderComponent() {
   render(
