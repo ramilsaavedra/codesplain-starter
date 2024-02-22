@@ -4,13 +4,15 @@ import RepositoriesSummary from "./RepositoriesSummary"
 test("display the primary language of the repo", () => {
   const repository = {
     language: "Javascript",
-    targazers_count: 1,
-    open_issues: 1,
+    stargazers_count: 5,
+    open_issues: 30,
     forks: 1,
   }
   render(<RepositoriesSummary repository={repository} />)
 
-  const language = screen.getByText("Javascript")
-
-  expect(language).toBeInTheDocument()
+  for (let key in repository) {
+    const value = repository[key]
+    const element = screen.getByText(new RegExp(value))
+    expect(element).toBeInTheDocument()
+  }
 })
