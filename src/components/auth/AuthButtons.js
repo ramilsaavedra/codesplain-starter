@@ -1,11 +1,10 @@
-import { Link } from 'react-router-dom';
-import useUser from '../../hooks/useUser';
+import { Link } from "react-router-dom"
+import useUser from "../../hooks/useUser"
 
 function AuthButtons() {
-  const { user, isLoading } = useUser();
-
+  const { user, isLoading } = useUser()
   if (isLoading) {
-    return null;
+    return null
   } else if (user) {
     return (
       <Link
@@ -14,7 +13,7 @@ function AuthButtons() {
       >
         Sign Out
       </Link>
-    );
+    )
   } else {
     return (
       <>
@@ -31,8 +30,8 @@ function AuthButtons() {
           Sign Up
         </Link>
       </>
-    );
+    )
   }
 }
 
-export default AuthButtons;
+export default AuthButtons
