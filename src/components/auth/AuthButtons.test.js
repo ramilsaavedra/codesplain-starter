@@ -27,7 +27,6 @@ describe("when user is not signed in", () => {
       path: "/api/user",
       method: "get",
       res: (res, req, ctx) => {
-        console.log("NOT LOGGED IN")
         return {
           user: null,
         }
@@ -69,7 +68,6 @@ describe("when user is signed in", () => {
       path: "/api/user",
       method: "get",
       res: (res, req, ctx) => {
-        console.log("LOGGED IN")
         return {
           user: {
             id: 1,
