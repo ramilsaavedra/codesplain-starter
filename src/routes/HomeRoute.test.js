@@ -26,11 +26,6 @@ function renderComponent() {
     </MemoryRouter>
   )
 }
-
-async function pause(resolve) {
-  await new Promise((res) => setTimeout(res, 100))
-}
-
 test("shows two links for each languge", async () => {
   const languages = ["javascript", "typescript", "rust", "go", "java", "python"]
 
